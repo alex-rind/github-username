@@ -1,5 +1,5 @@
-import test from 'ava';
 import githubUsername from '.';
+import test from 'ava';
 
 test('gets GitHub username from email', async t => {
 	t.is(await githubUsername('sindresorhus@gmail.com'), 'sindresorhus');
@@ -23,4 +23,8 @@ test('rejects when email is invalid', async t => {
 
 test('rejects when email is not a string', async t => {
 	await t.throwsAsync(githubUsername(() => 'sindresorhus_gmail.com'));
+});
+
+test('gets GitHub username from a GitHub-provided noreply email address', async t => {
+	t.is(await githubUsername('1217527+alex-rind@users.noreply.github.com'), 'alex-rind');
 });
